@@ -51,8 +51,8 @@ invoke `:reload` and then `test` in a single action:
 We recommend you perform some exercises before others. The first step
 is to inspect the introduction modules.
 
-* [ ] `Course.ExactlyOne`
-* [ ] `Course.Validation`
+* [x] `Course.ExactlyOne`
+* [x] `Course.Validation`
 
 They contain examples of data structures and Haskell syntax. They do not contain
 exercises and exist to provide a cursory examination of Haskell syntax. The next
@@ -60,7 +60,7 @@ step is to complete the exercises in `Course.Optional`.
 
 After this, we recommend the following progression of modules:
 
-* [ ] `Course.List`
+* [x] `Course.List`
 * [ ] `Course.Functor`
 * [ ] `Course.Applicative`
 * [ ] `Course.Monad`
