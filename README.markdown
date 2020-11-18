@@ -64,8 +64,8 @@ After this, we recommend the following progression of modules:
 * [x] `Course.Functor`
 * [x] `Course.Applicative`
 * [x] `Course.Monad`
-* [ ] `Course.FileIO`
-* [ ] `Course.State`
+* [x] `Course.FileIO`
+* [x] `Course.State`
 * [ ] `Course.StateT`
 * [ ] `Course.Extend`
 * [ ] `Course.Comonad`

@@ -1,15 +1,16 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RebindableSyntax #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 
 module Course.FileIO where
 
-import Course.Core
 import Course.Applicative
-import Course.Monad
+import Course.Core
 import Course.Functor
 import Course.List
+import Course.Monad
 
 {-
 
@@ -82,49 +83,55 @@ the contents of c
 -- Given the file name, and file contents, print them.
 -- Use @putStrLn@.
 printFile ::
-  FilePath
-  -> Chars
-  -> IO ()
-printFile =
-  error "todo: Course.FileIO#printFile"
+  FilePath ->
+  Chars ->
+  IO ()
+printFile path contents =
+  do
+    putStrLn ("============ " ++ path)
+    putStrLn contents
 
 -- Given a list of (file name and file contents), print each.
 -- Use @printFile@.
 printFiles ::
-  List (FilePath, Chars)
-  -> IO ()
-printFiles =
-  error "todo: Course.FileIO#printFiles"
+  List (FilePath, Chars) ->
+  IO ()
+printFiles = void . mapM (uncurry printFile)
 
 -- Given a file name, return (file name and file contents).
 -- Use @readFile@.
 getFile ::
-  FilePath
-  -> IO (FilePath, Chars)
-getFile =
-  error "todo: Course.FileIO#getFile"
+  FilePath ->
+  IO (FilePath, Chars)
+getFile path =
+  do
+    content <- readFile path
+    pure (path, content)
 
 -- Given a list of file names, return list of (file name and file contents).
 -- Use @getFile@.
 getFiles ::
-  List FilePath
-  -> IO (List (FilePath, Chars))
-getFiles =
-  error "todo: Course.FileIO#getFiles"
+  List FilePath ->
+  IO (List (FilePath, Chars))
+getFiles = mapM getFile
 
 -- Given a file name, read it and for each line in that file, read and print contents of each.
 -- Use @getFiles@, @lines@, and @printFiles@.
 run ::
-  FilePath
-  -> IO ()
-run =
-  error "todo: Course.FileIO#run"
+  FilePath ->
+  IO ()
+run path = do
+  content <- readFile path
+  files <- getFiles $ lines content
+  printFiles files
 
 -- /Tip:/ use @getArgs@ and @run@
 main ::
   IO ()
 main =
-  error "todo: Course.FileIO#main"
+  getArgs >>= \case
+    path :. Nil -> run path
+    _ -> putStrLn "usage: runhaskell io.hs filename"
 
 ----
 
@@ -132,3 +139,5 @@ main =
 -- ? `sequence . (<$>)`
 -- ? `void . sequence . (<$>)`
 -- Factor it out.
+mapM :: Applicative m => (a -> m b) -> List a -> m (List b)
+mapM f = sequence . (<$>) f

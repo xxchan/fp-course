@@ -133,7 +133,7 @@ join ::
   k (k a)
   -> k a
 -- =<< :: (k a->k a) -> k (k a) -> k a  
-join = (=<<) id
+join = (id =<<)
 
 -- | Implement a flipped version of @(=<<)@, however, use only
 -- @join@ and @(<$>)@.

@@ -363,15 +363,12 @@ replicateA n a = sequence $ replicate n a
 --
 filtering ::
   Applicative k =>
-  (a -> k Bool)
-  -> List a
-  -> k (List a)
-filtering _ Nil = pure Nil
-filtering f (h :. t) = (++) <$> l <*> filtering f t 
-  where 
-    g x b = if b then x :. Nil else Nil   
-    l = g h <$> f h
-
+  (a -> k Bool) ->
+  List a ->
+  k (List a)
+filtering f = foldRight g (pure Nil)
+  where
+    g x acc = (\b -> if b then (x :.) else id) <$> f x <*> acc
 -----------------------
 -- SUPPORT LIBRARIES --
 -----------------------
