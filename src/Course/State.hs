@@ -101,16 +101,15 @@ instance Applicative (State s) where
     State s (a -> b) ->
     State s a ->
     State s b
-  (<*>) stf sta =
+  (<*>) (State f) (State a) =
     State
       ( \s ->
-          let (f, s') = runState stf s
-           in let (a, s'') = runState sta s'
-               in (f a, s'')
+          let (ff, s') = f s
+              (aa, s'') = a s'
+           in (ff aa, s'')
       )
 
 -- | Implement the `Monad` instance for `State s`.
---
 -- >>> runState ((const $ put 2) =<< put 1) 0
 -- ((),2)
 --

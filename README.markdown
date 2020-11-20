@@ -66,7 +66,7 @@ After this, we recommend the following progression of modules:
 * [x] `Course.Monad`
 * [x] `Course.FileIO`
 * [x] `Course.State`
-* [ ] `Course.StateT`
+* [x] `Course.StateT`
 * [ ] `Course.Extend`
 * [ ] `Course.Comonad`
 * [ ] `Course.Contravariant`
@@ -80,18 +80,6 @@ After this, we recommend the following progression of modules:
 * [ ] `Course.Anagrams`
 * [ ] `Course.FastAnagrams`
 * [ ] `Course.Cheque`
-
-During this progression, it is often the case that some exercises are abandoned
-due to time constraints and the benefit of completing some exercises over
-others. For example, in the progression, `Course.Functor` to `Course.Monad`, the
-exercises repeat a similar theme. Instead, a participant may wish to do
-different exercises, such as `Course.Parser`. In this case, the remaining
-answers are filled out, so that progress on to `Course.Parser` can begin
-(which depends on correct answers up to `Course.Monad`). It is recommended to
-take this deviation if it is felt that there is more reward in doing so.
-
-Answers for the exercises can be found here:
-[https://github.com/tonymorris/fp-course](https://github.com/tonymorris/fp-course)
 
 After these are completed, complete the exercises in the `projects` directory.
 
@@ -193,98 +181,6 @@ The exercises in `Parser.hs` can be assisted by stating problems in a specific w
 * delete `\`
 * swap each side of `in`
 * turn value into `select`
-
-### Demonstrate IO maintains referential transparency
-
-Are these two programs, the same program?
-
-    p1 ::
-      IO ()
-    p1 =
-      let file = "/tmp/file"
-      in  do  _ <- writeFile file "abcdef"
-              x <- readFile file
-              _ <- putStrLn x
-              _ <- writeFile file "ghijkl"
-              y <- readFile file
-              putStrLn (show (x, y))
-
-    p2 ::
-      IO ()
-    p2 =
-      let file = "/tmp/file"
-          expr = readFile file
-      in  do  _ <- writeFile file "abcdef"
-              x <- expr
-              _ <- putStrLn x
-              _ <- writeFile file "ghijkl"
-              y <- expr
-              putStrLn (show (x, y))
-
-What about these two programs?
-
-    def writeFile(filename, contents):
-        with open(filename, "w") as f:
-            f.write(contents)
-
-    def readFile(filename):
-        contents = ""
-        with open(filename, "r") as f:
-            contents = f.read()
-            return contents
-
-    def p1():
-        file = "/tmp/file"
-
-        writeFile(file, "abcdef")
-        x = readFile(file)
-        print(x)
-        writeFile(file, "ghijkl")
-        y = readFile(file)
-        print (x + y)
-
-    def p2():
-        file = "/tmp/file"
-        expr = readFile(file)
-
-        writeFile(file, "abcdef")
-        x = expr
-        print(x)
-        writeFile(file, "ghijkl")
-        y = expr
-        print (x + y)
-
-### One-day
-
-Sometimes this course material is condensed into one-day. In these cases, the
-following exercises are recommended:
-
-* `Optional`
-  * `mapOptional`
-  * `bindOptional`
-  * `(??)`
-  * `(<+>)`
-* `List`
-  * `headOr`
-  * `product`
-  * `length`
-  * `map`
-  * `filter`
-  * `(++)`
-  * `flatMap`
-  * `reverse`
-* `Functor`
-  * `instance Functor List`
-  * `instance Functor Optional`
-  * `instance Functor ((->) t)`
-  * `instance Functor void`
-* `Applicative`
-  * `instance Applicative List`
-  * `instance Applicative Optional`
-  * `instance Applicative ((->) t)`
-  * `lift2`
-  * `sequence`
-* `FileIO`
 
 ### References
 
