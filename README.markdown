@@ -67,10 +67,10 @@ After this, we recommend the following progression of modules:
 * [x] `Course.FileIO`
 * [x] `Course.State`
 * [x] `Course.StateT`
-* [ ] `Course.Extend`
-* [ ] `Course.Comonad`
-* [ ] `Course.Contravariant`
-* [ ] `Course.Compose`
+* [x] `Course.Extend`
+* [x] `Course.Comonad`
+* [x] `Course.Contravariant`
+* [x] `Course.Compose`
 * [ ] `Course.Traversable`
 * [ ] `Course.ListZipper`
 * [ ] `Course.Parser` *(see also `Course.Person` for the parsing rules)*
