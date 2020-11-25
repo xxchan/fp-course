@@ -111,7 +111,10 @@ instance Monad ((->) t) where
 -- <$> :: (a->b) -> k a -> k b
 -- =<< :: (a -> k b) -> k a -> k b
 -- ? =<< f :: k b.  ? :: (a->b) -> k b
-(<**>) f a =  (<$> a) =<< f
+(<**>) f a = 
+  f >>= \f' -> 
+  a >>= \a' ->
+  return (f' a')
 
 infixl 4 <**>
 

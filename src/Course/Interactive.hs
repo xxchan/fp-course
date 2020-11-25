@@ -83,7 +83,10 @@ data Op =
 convertInteractive ::
   IO ()
 convertInteractive =
-  error "todo: Course.Interactive#convertInteractive"
+  putStr "Enter a string: " >-
+  getLine >>= \s ->
+  putStr "" >-
+  putStrLn (toUpper <$> s)
 
 -- |
 --
@@ -111,7 +114,10 @@ convertInteractive =
 reverseInteractive ::
   IO ()
 reverseInteractive =
-  error "todo: Course.Interactive#reverseInteractive"
+  putStr "Enter a filename to reverse: " >-
+  getLine >>= \s ->
+  readFile s >>= \content ->
+  putStrLn (reverse content) 
 
 -- |
 --
@@ -137,7 +143,16 @@ reverseInteractive =
 encodeInteractive ::
   IO ()
 encodeInteractive =
-  error "todo: Course.Interactive#encodeInteractive"
+  putStr "Enter a string: " >-
+  getLine >>= \s ->
+  putStr "" >-
+  putStrLn (encode s)
+    where 
+      encode s = s >>= \c-> case c of
+                        ' '  -> "%20"
+                        '\t' -> "%09"
+                        '"'  -> "%22"
+                        _    -> c :. Nil
 
 interactive ::
   IO ()

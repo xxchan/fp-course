@@ -40,5 +40,6 @@ equalIgnoringCase ::
   Chars
   -> Chars
   -> Bool
-equalIgnoringCase =
-  error "todo: Course.Anagrams#equalIgnoringCase"
+equalIgnoringCase s1 s2 = 
+   length s1 == length s2 && 
+   foldRight (\(c1,c2) b -> b && (toLower c1 == toLower c2)) True (zip s1 s2)
