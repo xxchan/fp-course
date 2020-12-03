@@ -124,7 +124,7 @@ character =
   P
     ( \case
         c :. s -> Result s c
-        _ -> UnexpectedString ""
+        _ -> UnexpectedEof
     )
 
 -- | Parsers can map.

@@ -13,12 +13,12 @@ import qualified Data.Set as S
 -- on a Mac - run this with:
 -- > fastAnagrams "Tony" "/usr/share/dict/words"
 fastAnagrams ::
-  Chars
-  -> FilePath
-  -> IO (List Chars)
-fastAnagrams =
-  error "todo: Course.FastAnagrams#fastAnagrams"
-
+  Chars ->
+  FilePath ->
+  IO (List Chars)
+fastAnagrams s path =
+  filter (\a -> S.member a  (S.fromList (hlist (permutations s)))) . lines <$> readFile path
+  
 newtype NoCaseString =
   NoCaseString {
     ncString :: Chars

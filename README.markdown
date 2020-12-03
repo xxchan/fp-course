@@ -74,11 +74,11 @@ After this, we recommend the following progression of modules:
 * [x] `Course.Traversable`
 * [x] `Course.ListZipper`
 * [x] `Course.Parser` *(see also `Course.Person` for the parsing rules)*
-* [ ] `Course.MoreParser`
-* [ ] `Course.JsonParser`
+* [x] `Course.MoreParser`
+* [x] `Course.JsonParser`
 * [x] `Course.Interactive`
-* [ ] `Course.Anagrams`
-* [ ] `Course.FastAnagrams`
+* [x] `Course.Anagrams`
+* [x] `Course.FastAnagrams`
 * [ ] `Course.Cheque`
 
 After these are completed, complete the exercises in the `projects` directory.

@@ -32,8 +32,8 @@ anagrams ::
   Chars
   -> FilePath
   -> IO (List Chars)
-anagrams =
-  error "todo: Course.Anagrams#anagrams"
+anagrams s path =
+    (\f -> intersectBy equalIgnoringCase (lines f) (permutations s)) <$> readFile path
 
 -- Compare two strings for equality, ignoring case
 equalIgnoringCase ::
